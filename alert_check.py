@@ -19,6 +19,7 @@ print_json_output = True
 send_apprise = True
 
 # Outer dictionary name must match the alert_cords dictionary name
+# See https://pypi.org/project/apprise/ for list of possible targets
 alert_apprise = {
     'KRDU': {
         "targets": ["discord://webhook_id/webhook_token"],
