@@ -29,8 +29,8 @@ alert_apprise = {
 }
 
 # Turn on debug logging
-debug_logs = True
-debug_more = True
+debug_logs = False
+debug_more = False
 
 # ==========================================================================
 #   Dont touch the code below
@@ -163,6 +163,7 @@ if send_apprise:
                         print("Title: %s" % formated_title)
                         print("  Msg: %s" % formated_message)
                         print()
+                    apobj.notify(body=formated_message, title=formated_title)
 
         del apobj
     
