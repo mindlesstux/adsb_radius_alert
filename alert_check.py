@@ -6,9 +6,9 @@
 aircraft_json_url = "https://mindlesstux.com/skyaware/data/aircraft.json"
 
 # Dictionary of points to alrt around
-# "pointname": [lat, long, altitude low, altitude high, radius/km, point text friendly name, regex flight]
+# "pointname": [lat, long, altitude low, altitude high, radius/miles, point text friendly name, regex flight]
 alert_cords = {
-    "KRDU": [35.879204, -78.787162, 0, 1000000, 30, "RDU Airport", ()],
+    "KRDU": [35.879204, -78.787162, 0, 1000000, 5, "RDU Airport", ()],
     "Point_2": [0, 0, 0, 1000000, 30, "Far Point", ()],
 }
 
@@ -24,7 +24,7 @@ alert_apprise = {
     'KRDU': {
         "targets": ["discord://webhook_id/webhook_token"],
         "title": "Aircraft Alert",
-        "message": "Aircraft $hex ($flight) is near by!  It is $distance km away at $altitude ft"
+        "message": "Aircraft $hex ($flight) is near by!  It is $distance mi away at $altitude ft"
     }
 }
 
@@ -54,9 +54,9 @@ aircraft_json_url += str(int(time.time()))
 if debug_logs:
     print("Generated URL: %s" % (aircraft_json_url))
 
-# Use GeoPy to do the math for us into kilometers
+# Use GeoPy to do the math for us into miles
 def check_within_radius(coords_center, coords_target, radius_limit):
-    target_distance = distance.distance(coords_center, coords_target).km
+    target_distance = distance.distance(coords_center, coords_target).miles
     target_distance = round(target_distance,3)
     if radius_limit >= target_distance:
         return (True, target_distance)
@@ -95,7 +95,7 @@ for name, point in alert_cords.items():
     # Loop through all aircraft
     tmp={}
     for aircraft in aircraft_data['aircraft']:
-        # Do we have lat/long for the aircraft? If not asusme its out of the area we care about
+        # Do we have lat/long for the aircraft? If not assume its out of the area we care about
         if "lat" in aircraft.keys() and "lon" in aircraft.keys():
             coords_target = (aircraft['lat'], aircraft['lon'])
             result_radius = check_within_radius(coords_center, coords_target, radius_limit)
