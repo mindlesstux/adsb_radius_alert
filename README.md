@@ -3,6 +3,7 @@ Send alerts based on if aircraft are withing a certain range of a point based on
 
 # To Do still
 - Regex of aircraft name per point
+- System to not alert multiple times on an aircraft
 
 # Python packages needed
 ```
