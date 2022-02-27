@@ -1,6 +1,9 @@
 # What is adsb_radius_alert
 Send alerts based on if aircraft are withing a certain range of a point based on data gathered by fa-dump1090
 
+# To Do still
+- Regex of aircraft name per point
+
 # Python packages needed
 ```
 pip3 install apprise
