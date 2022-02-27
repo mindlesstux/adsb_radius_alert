@@ -24,7 +24,7 @@ alert_apprise = {
     'KRDU': {
         "targets": ["discord://webhook_id/webhook_token"],
         "title": "Aircraft Alert",
-        "message": "Aircraft $hex ($flight) is near by!  It is $distance mi away at $altitude ft"
+        "message": "Aircraft ${hex} (${flight}) is near by!  It is ${distance} mi away at ${altitude} ft"
     }
 }
 
