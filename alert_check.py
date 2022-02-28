@@ -8,7 +8,7 @@ aircraft_json_url = "https://mindlesstux.com/skyaware/data/aircraft.json"
 # Dictionary of points to alrt around
 # "pointname": [lat, long, altitude low, altitude high, radius/miles, point text friendly name, regex flight]
 alert_cords = {
-    "KRDU": [35.879204, -78.787162, 0, 1000000, 5, "RDU Airport", ['','']],
+    "KRDU": [35.879204, -78.787162, 0, 1000000, 5, "RDU Airport", []],
     "Point_2": [0, 0, 0, 1000000, 30, "Far Point", ()],
 }
 
