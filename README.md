@@ -3,12 +3,13 @@ Send alerts based on if aircraft are withing a certain range of a point based on
 
 # To Do still
 - Regex of aircraft name per point
+ - code added but is untested
 - System to not alert multiple times on an aircraft
 
 # Python packages needed
 ```
 pip3 install apprise
-pip3 intall geopy
+pip3 install geopy
 ```
 
 # Running it
