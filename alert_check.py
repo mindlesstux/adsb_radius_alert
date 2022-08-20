@@ -9,7 +9,7 @@ aircraft_json_url = "https://mindlesstux.com/skyaware/data/aircraft.json"
 # "pointname": [lat, long, altitude low, altitude high, radius/miles, point text friendly name, regex flight]
 alert_cords = {
     "KRDU": [35.879204, -78.787162, 0, 1000000, 5, "RDU Airport", []],
-    "Point_2": [0, 0, 0, 1000000, 30, "Far Point", ()],
+    "Point_2": [0, 0, 0, 1000000, 30, "Far Point", []],
 }
 
 # At the end output to console some json
@@ -29,8 +29,8 @@ alert_apprise = {
 }
 
 # Turn on debug logging
-debug_logs = False
-debug_more = False
+debug_logs = True
+debug_more = True
 
 # ==========================================================================
 #   Dont touch the code below
@@ -43,7 +43,7 @@ import json
 import re
 from string import Template
 import time
-from urllib.request import urlopen
+import urllib
 
 alerts = {}
 
@@ -71,7 +71,8 @@ def check_altitude_limits(alt_low, alt_high, target_alt):
         return (False, 0)
 
 # Pull down the aircraft.json file and load it to an variable
-response = urlopen(aircraft_json_url)
+request = urllib.request.Request(aircraft_json_url, headers={'User-Agent' : "github.com - mindlesstux / adsb_radius_alert"})
+response = urllib.request.urlopen(request)
 aircraft_data = json.loads(response.read())
 
 # Debug output of the data array
@@ -116,7 +117,7 @@ for name, point in alert_cords.items():
 
         # Check the regex strings, if blank, mark true
         if regex_strings == []:
-            result_altitude = [True, 0]
+            result_regex = [True, 0]
         else:
             # Default false if we have a string
             result_regex = [False,0]
@@ -124,6 +125,13 @@ for name, point in alert_cords.items():
             for resrchstr in regex_strings:
                 if re.match(resrchstr, aircraft['flight']):
                     result_regex = [True, 0]
+                else:
+                    result_regex = [False,0]
+        if debug_more:
+            print()
+            print(json.dumps(result_radius, indent=4, sort_keys=True))
+            print(json.dumps(result_altitude, indent=4, sort_keys=True))
+            print(json.dumps(result_regex, indent=4, sort_keys=True))
 
         # Is the plane in the point radius for alerting?
         if result_radius[0] == True and result_altitude[0] == True and result_regex[0] == True:
