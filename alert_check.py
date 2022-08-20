@@ -29,8 +29,8 @@ alert_apprise = {
 }
 
 # Turn on debug logging
-debug_logs = True
-debug_more = True
+debug_logs = False
+debug_more = False
 
 # ==========================================================================
 #   Dont touch the code below
