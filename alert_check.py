@@ -125,8 +125,7 @@ for name, point in alert_cords.items():
             for resrchstr in regex_strings:
                 if re.match(resrchstr, aircraft['flight']):
                     result_regex = [True, 0]
-                else:
-                    result_regex = [False,0]
+
         if debug_more:
             print()
             print(json.dumps(result_radius, indent=4, sort_keys=True))
